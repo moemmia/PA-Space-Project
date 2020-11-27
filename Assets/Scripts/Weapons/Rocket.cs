@@ -23,9 +23,16 @@ public class Rocket : MonoBehaviour
         _objective = null;
     }
 
+    void Update(){
+        if(_objective != null && !_objective.gameObject.activeSelf) {
+            _objective = null;
+        }
+    }
+
+
     void FixedUpdate(){
         _rg.velocity = _transform.forward * speed;
-        if(_objective != null && _objective.gameObject.activeSelf) {
+        if(_objective != null) {
             Quaternion targetRotation = Quaternion.LookRotation(_objective.position - _transform.position);
             _rg.MoveRotation(Quaternion.RotateTowards(_transform.rotation, targetRotation,turn));
         }

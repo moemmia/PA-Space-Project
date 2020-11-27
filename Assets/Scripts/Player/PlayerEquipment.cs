@@ -6,7 +6,7 @@ using System.Linq;
 public class PlayerEquipment : MonoBehaviour {
 
     public List<PlayerWeapon> weapons;
-    private int _selectedWeapon;
+    private int _selectedWeapon = 1;
 
     public void SetShooting(bool isShooting) {
         weapons[_selectedWeapon].SetShooting(isShooting);

@@ -35,9 +35,6 @@ public abstract class Weapon : MonoBehaviour {
     }
 
     protected virtual float cooldown { get; }
-    protected virtual Vector3 GetShootDirection() {
-         return _transform.forward;
-    }
     public virtual void SetShooting(bool isShooting) {
         _isShooting = isShooting;
     }

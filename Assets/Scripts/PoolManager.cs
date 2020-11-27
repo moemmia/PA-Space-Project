@@ -34,7 +34,7 @@ public class PoolManager : Singleton<PoolManager> {
     }
 
     public GameObject Spawn(GameObject prefab, Vector3 pos, Quaternion rot) {
-        return Spawn(prefab, prefab.transform.position, prefab.transform.rotation, prefab.transform.localScale);
+        return Spawn(prefab, pos, rot, prefab.transform.localScale);
     }
 
     public GameObject Spawn(GameObject prefab, Vector3 pos, Quaternion rot, Vector3 scale) {

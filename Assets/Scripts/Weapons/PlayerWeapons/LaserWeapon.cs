@@ -11,6 +11,7 @@ public class LaserWeapon : PlayerWeapon {
     protected override void Awake() {
         base.Awake();
         _lineRenderer = gameObject.AddComponent<LineRenderer>();
+        _lineRenderer.enabled = false;
         _lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         _lineRenderer.widthMultiplier = 0.2f;
         _lineRenderer.positionCount = 2;
@@ -22,7 +23,7 @@ public class LaserWeapon : PlayerWeapon {
     protected override void InstanciateShoot() {
         _lineRenderer.SetPosition(0, _transform.position);
         RaycastHit hit;
-        Vector3 shootDirection = GetShootDirection();
+        Vector3 shootDirection = _transform.forward;
         if(Physics.Raycast(_transform.position, shootDirection, out hit, maxRayLength)){
             _lineRenderer.SetPosition(1, hit.point);
         } else {

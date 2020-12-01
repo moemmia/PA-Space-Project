@@ -811,8 +811,8 @@ MonoBehaviour:
   enemyShipPrefab: {fileID: 5113994982163632497, guid: d069bc63cefb7ec4396c3f3f5a49ae7d,
     type: 3}
   maxEnemyShipNumber: 2
-  minEnemyShipDistance: 350
-  maxEnemyShipDistance: 500
+  minEnemyShipDistance: 750
+  maxEnemyShipDistance: 800
   minEnemyShipScale: 1
   maxEnemyShipScale: 4
 --- !u!4 &1446555879

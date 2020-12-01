@@ -7,7 +7,8 @@ public class Rocket : MonoBehaviour
     public float speed = 15;
     public float turn = 15;
     public float timeToDespawn = 5;
-    public int damage = 1;
+    public float realDamage = 5;
+    public float shieldsDamage = 1;
 
     protected Transform _transform;
     protected Rigidbody _rg;
@@ -48,10 +49,10 @@ public class Rocket : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision col) {
-        // var h = col.collider.GetComponent<Health>();
-        // if (h) {
-        //     h.TakeDamage(damage);
-        // }
+        var h = col.collider.GetComponent<Health>();
+        if (h) {
+            h.TakeDamage(realDamage, shieldsDamage);
+        }
         PoolManager.instance.Despawn(gameObject);
     }
 

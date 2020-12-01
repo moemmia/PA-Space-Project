@@ -7,6 +7,9 @@ public class RocketWeapon : PlayerWeapon {
     public GameObject rocketPrefab;
     protected override float cooldown {get => .5f;}
 
+    void Start(){
+        PoolManager.instance.Load(rocketPrefab, 20);
+    }
     protected override void InstanciateShoot() {
         RaycastHit hit;
         Physics.Raycast(_transform.position, _transform.forward, out hit, Mathf.Infinity);

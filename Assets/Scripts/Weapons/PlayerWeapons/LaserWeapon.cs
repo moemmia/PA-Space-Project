@@ -7,6 +7,12 @@ public class LaserWeapon : PlayerWeapon {
 
     protected LineRenderer _lineRenderer;
     public float maxRayLength = 1000;
+    public float realDamage = 1f;
+    public float shieldsDamage = 5f;
+    public float timeBetweenDamage = 0.1f;
+
+    Health currentObj;
+    float startTime;
 
     protected override void Awake() {
         base.Awake();
@@ -26,6 +32,19 @@ public class LaserWeapon : PlayerWeapon {
         Vector3 shootDirection = _transform.forward;
         if(Physics.Raycast(_transform.position, shootDirection, out hit, maxRayLength)){
             _lineRenderer.SetPosition(1, hit.point);
+            var h = hit.collider.GetComponent<Health>();
+            if (h) {
+                if(h == currentObj){
+                    if(Time.time - startTime >= timeBetweenDamage) {
+                        h.TakeDamage(realDamage, shieldsDamage);
+                        startTime = Time.time;
+                    }
+                } else {
+                    currentObj = h;
+                    startTime = Time.time;
+                    h.TakeDamage(realDamage, shieldsDamage);
+                }
+            }
         } else {
             _lineRenderer.SetPosition(1, _transform.position + shootDirection * maxRayLength);
         }

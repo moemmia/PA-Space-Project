@@ -37,7 +37,7 @@ public class PlayerInput : MonoBehaviour {
 
     private void MouseInput() {
         isShooting = Input.GetAxis("Fire1") > 0;
-        scroll = Input.GetAxis("Mouse ScrollWheel");
+        scroll = Input.GetAxis("Mouse ScrollWheel") * 10;
     }
 
 }

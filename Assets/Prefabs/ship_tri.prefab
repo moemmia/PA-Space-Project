@@ -156,6 +156,8 @@ GameObject:
   - component: {fileID: 8964399910253840010}
   - component: {fileID: 1377650459713177980}
   - component: {fileID: 3741715904142138917}
+  - component: {fileID: -1817895159165260944}
+  - component: {fileID: 1827379624}
   m_Layer: 0
   m_Name: ship_tri
   m_TagString: Untagged
@@ -267,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35be667ed10f5444a28c2faabf2e803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthBar: {fileID: 0}
 --- !u!114 &5504866992529961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4774f3949cd444a84a08cfb4e1371f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponImage: {fileID: 0}
   weapons:
   - {fileID: 1377650459713177980}
   - {fileID: 3741715904142138917}
@@ -320,7 +324,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b252d465535f04481b8710948c1f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0.5
+  _weaponImage: {fileID: 21300000, guid: cc6aab7d125cc0040b32a7c4f58e866f, type: 3}
+  maxRayLength: 500
+  realDamage: 1
+  shieldsDamage: 5
+  timeBetweenDamage: 0.5
 --- !u!114 &3741715904142138917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,4 +341,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b96f8ff533394984488d599189da054a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0.5
+  _weaponImage: {fileID: 21300000, guid: baa78f33265ad6b46b92c9e9ba3b23a6, type: 3}
+  rocketPrefab: {fileID: 3338463200650610769, guid: 96c64c427a1d5b442997ceb0054ea4ac,
+    type: 3}
+--- !u!114 &-1817895159165260944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2639817752584144874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f1276adff0f0b4e836fa3e25ce45bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 20
+  maxShield: 5
+  regenerateShieldRatio: 1
+  immortalTimer: 0.75
+  Die:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2910431003956781382}
+        m_MethodName: OnDie
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1827379624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2639817752584144874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b6e467cb8f6e8498ab72e230714a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
+  shieldSlider: {fileID: 0}

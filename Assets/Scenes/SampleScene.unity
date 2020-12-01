@@ -808,6 +808,13 @@ MonoBehaviour:
   maxAsteroidDistance: 250
   minAsteroidScale: 0.5
   maxAsteroidScale: 3
+  enemyShipPrefab: {fileID: 5113994982163632497, guid: d069bc63cefb7ec4396c3f3f5a49ae7d,
+    type: 3}
+  maxEnemyShipNumber: 2
+  minEnemyShipDistance: 350
+  maxEnemyShipDistance: 500
+  minEnemyShipScale: 1
+  maxEnemyShipScale: 4
 --- !u!4 &1446555879
 Transform:
   m_ObjectHideFlags: 0
@@ -1219,7 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c61a2d04a75a74488caa8045420ef22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _positionOffset: {x: 0, y: 0.04, z: -0.1}
+  _positionOffset: {x: 0, y: 4, z: -10}
   smooth: 90
 --- !u!81 &1720490680
 AudioListener:
@@ -1684,6 +1691,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452383974498508112, guid: 7c36312506a4daf44bcbe66b0b938986,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452383974498508112, guid: 7c36312506a4daf44bcbe66b0b938986,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452383974498508112, guid: 7c36312506a4daf44bcbe66b0b938986,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8964399910253840010, guid: 7c36312506a4daf44bcbe66b0b938986,
         type: 3}

@@ -21,6 +21,7 @@ public class Health : MonoBehaviour
     protected bool _immortal;
 
     protected Color _startingColor;
+    protected Color _currentColor;
 
     public UnityEvent Die;
 
@@ -41,6 +42,7 @@ public class Health : MonoBehaviour
         _currentHealth = maxHealth;
         _currentShield = maxShield;
         _r.material.SetColor("_EmissionColor", _startingColor);
+        _currentColor = _startingColor;
         StartCoroutine(RegenerateShield());
     }
 
@@ -51,12 +53,12 @@ public class Health : MonoBehaviour
                     _currentHealth -= realDamage;
                 if (_currentHealth > 0)
                 {
-                    StartCoroutine(DamageFlash(Color.red));
+                    StartCoroutine(DamageFlash(Color.red, _currentHealth/maxHealth));
                 } else {
                     Die.Invoke();
                 }
             } else {
-                 StartCoroutine(DamageFlash(Color.white));
+                 StartCoroutine(DamageFlash(Color.white, 1));
             }
         }
     }
@@ -72,12 +74,13 @@ public class Health : MonoBehaviour
         
     }
 
-    protected IEnumerator DamageFlash(Color col) {
+    protected IEnumerator DamageFlash(Color col, float transition) {
         for (int i = 0; i < 5; i++) {
-            _r.material.SetColor("_EmissionColor", i % 2 == 0 ? col : _startingColor);
+            _r.material.SetColor("_EmissionColor", i % 2 == 0 ? col : _currentColor);
             yield return new WaitForSeconds(.1f);
         }
-        _r.material.SetColor("_EmissionColor", Color.Lerp(col, _startingColor, _currentHealth / maxHealth));
+        _currentColor = Color.Lerp(col, _currentColor, transition);
+        _r.material.SetColor("_EmissionColor", _currentColor);
     }
 
     protected IEnumerator ImmortalTimer()

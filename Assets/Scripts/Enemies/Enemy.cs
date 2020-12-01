@@ -7,6 +7,10 @@ public class Enemy : MonoBehaviour {
     public float linearForce = 1000;
     public float despawnDistance = 1000;
     public float angularForce = 1f;
+    public float maxDistanceToTarget = 10f;
+    public float minDistanceShootTarget = 100f;
+    public float maxAngleShootTarget = 25f;
+
 
     protected Rigidbody _rg;
     protected Transform _playerTransform;
@@ -32,6 +36,7 @@ public class Enemy : MonoBehaviour {
         _transform.forward = normalizedDirection;
         linearForce -= _transform.localScale.x * 100f;
         angularForce -= _transform.localScale.x * 0.1f;
+        maxDistanceToTarget += _transform.localScale.x;
     }
 
     private void OnDisable() {
@@ -49,8 +54,8 @@ public class Enemy : MonoBehaviour {
 
     void FixedUpdate() {
         Vector3 targetDelta = _playerTransform.position - _transform.position;
-        float distance = Vector3.Distance(_transform.position,  _playerTransform.position);
-        float angle = Vector3.Angle(_transform.forward,  _playerTransform.forward);
+        float distance = Vector3.Distance(_transform.position,  _playerTransform.position) - maxDistanceToTarget;
+        float angle = Vector3.Angle(_transform.forward, targetDelta);
 
         Quaternion targetRotation = Quaternion.LookRotation(targetDelta);
         _rg.MoveRotation(Quaternion.RotateTowards(_transform.rotation, targetRotation, angularForce));
@@ -58,8 +63,8 @@ public class Enemy : MonoBehaviour {
         Vector3 linearInput = _transform.forward;
         Vector3 appliedLinearForce = linearInput * linearForce * distance/despawnDistance;
         _rg.AddForce(appliedLinearForce, ForceMode.Acceleration);
-
-        _weapon.SetShooting(distance <= 100 && angle < 205f && angle > 167f);
+        
+        _weapon.SetShooting(distance <= minDistanceShootTarget && angle < maxAngleShootTarget);
 
         if (_directionToPlayer.magnitude >= despawnDistance) {
             PoolManager.instance.Despawn(gameObject);

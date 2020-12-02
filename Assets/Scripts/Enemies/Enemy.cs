@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    public float linearForce = 1000;
-    public float despawnDistance = 1000;
+    public float linearForce = 1000f;
+    public float despawnDistance = 1000f;
     public float angularForce = 1f;
     public float maxDistanceToTarget = 10f;
     public float minDistanceShootTarget = 100f;
@@ -17,8 +17,6 @@ public class Enemy : MonoBehaviour {
     protected Transform _transform;
     private EnemyEquipment _weapon;
     protected Vector3 _directionToPlayer;
-    protected float _defaultLinearForce;
-    protected float _defaultAngularForce;
 
     public int realDamage = 5;
     public int shieldsDamage = 1;
@@ -30,16 +28,12 @@ public class Enemy : MonoBehaviour {
         _playerTransform = Player.instance.GetComponent<Transform>();
         _health = GetComponent<Health>();
         _weapon = GetComponent<EnemyEquipment>();
-        _defaultAngularForce = angularForce;
-        _defaultLinearForce = linearForce;
     }
 
     private void OnEnable() {
         _directionToPlayer = _playerTransform.position - _transform.position;
         var normalizedDirection = _directionToPlayer.normalized;
         _transform.forward = normalizedDirection;
-        linearForce = _defaultLinearForce - _transform.localScale.x * 50f;
-        angularForce = _defaultAngularForce - _transform.localScale.x * 0.05f;
         maxDistanceToTarget += _transform.localScale.x;
     }
 

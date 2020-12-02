@@ -13,6 +13,11 @@ public class GameManager : Singleton<GameManager> {
     public GameObject enemyShipPrefab;
     public int maxEnemyShipNumber;
     public float minEnemyShipDistance, maxEnemyShipDistance, minEnemyShipScale, maxEnemyShipScale;
+
+    [Header("Turrent enemies generation settings:")]
+    public GameObject enemyTurretPrefab;
+    public int maxEnemyTurretNumber;
+    public float minEnemyTurretDistance, maxEnemyTurretDistance, minEnemyTurretScale, maxEnemyTurretScale;
    
     protected Transform _playerTransform;
 
@@ -23,8 +28,10 @@ public class GameManager : Singleton<GameManager> {
     private void Start() {
         PoolManager.instance.Load(asteroidPrefab, maxAsteroidsNumber);
         PoolManager.instance.Load(enemyShipPrefab, maxEnemyShipNumber);
+        PoolManager.instance.Load(enemyTurretPrefab, maxEnemyTurretNumber);
         StartCoroutine(GenerateOnUpdate(asteroidPrefab, maxAsteroidsNumber, maxAsteroidDistance, minAsteroidDistance, maxAsteroidScale, minAsteroidScale));
         StartCoroutine(GenerateOnUpdate(enemyShipPrefab, maxEnemyShipNumber, maxEnemyShipDistance, minEnemyShipDistance, maxEnemyShipScale, minEnemyShipScale));
+        StartCoroutine(GenerateOnUpdate(enemyTurretPrefab, maxEnemyTurretNumber, maxEnemyTurretDistance, minEnemyTurretDistance, maxEnemyTurretScale, minEnemyTurretScale));
     }
 
     private IEnumerator GenerateOnUpdate(GameObject prefab, int maxNumber, float maxDistance, float minDistance, float maxScale, float minScale) {

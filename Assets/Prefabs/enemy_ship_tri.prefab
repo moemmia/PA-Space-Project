@@ -161,6 +161,9 @@ MonoBehaviour:
   linearForce: 1000
   despawnDistance: 1000
   angularForce: 1
+  maxDistanceToTarget: 10
+  minDistanceShootTarget: 100
+  maxAngleShootTarget: 25
   realDamage: 5
   shieldsDamage: 1
 --- !u!114 &-594064391167515522

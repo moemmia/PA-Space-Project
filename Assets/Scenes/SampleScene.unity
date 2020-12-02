@@ -810,11 +810,18 @@ MonoBehaviour:
   maxAsteroidScale: 3
   enemyShipPrefab: {fileID: 5113994982163632497, guid: d069bc63cefb7ec4396c3f3f5a49ae7d,
     type: 3}
-  maxEnemyShipNumber: 2
+  maxEnemyShipNumber: 1
   minEnemyShipDistance: 750
   maxEnemyShipDistance: 800
   minEnemyShipScale: 1
   maxEnemyShipScale: 4
+  enemyTurretPrefab: {fileID: 9120605424573608325, guid: fe55f2c3d7998f54ab8089fec1328418,
+    type: 3}
+  maxEnemyTurretNumber: 3
+  minEnemyTurretDistance: 250
+  maxEnemyTurretDistance: 350
+  minEnemyTurretScale: 0.5
+  maxEnemyTurretScale: 3
 --- !u!4 &1446555879
 Transform:
   m_ObjectHideFlags: 0

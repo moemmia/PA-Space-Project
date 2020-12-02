@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: -2105695272502681645}
   - component: {fileID: -594064391167515522}
   - component: {fileID: 8795232095039249921}
+  - component: {fileID: -4044425367042709276}
+  - component: {fileID: -1289088109637723098}
   m_Layer: 0
   m_Name: enemy_ship_tri
   m_TagString: Untagged
@@ -158,12 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fc0a7cb1765c443ac9b4f30abd9cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linearForce: 1000
   despawnDistance: 1000
-  angularForce: 1
-  maxDistanceToTarget: 10
-  minDistanceShootTarget: 100
-  maxAngleShootTarget: 25
   realDamage: 5
   shieldsDamage: 1
 --- !u!114 &-594064391167515522
@@ -193,6 +190,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketPrefab: {fileID: 3338463200650610769, guid: 96c64c427a1d5b442997ceb0054ea4ac,
     type: 3}
+--- !u!114 &-4044425367042709276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5113994982163632497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1464002c600687f448093bd9222d486d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linearForce: 1
+  angularForce: 1
+  maxDistanceToTarget: 10
+  minDistanceShootTarget: 100
+  maxAngleShootTarget: 25
+--- !u!114 &-1289088109637723098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5113994982163632497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a6eb21c0c87e34a863318ce3519a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7086989149358707498
 GameObject:
   m_ObjectHideFlags: 0

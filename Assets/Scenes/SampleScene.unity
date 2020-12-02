@@ -810,7 +810,7 @@ MonoBehaviour:
   maxAsteroidScale: 3
   enemyShipPrefab: {fileID: 5113994982163632497, guid: d069bc63cefb7ec4396c3f3f5a49ae7d,
     type: 3}
-  maxEnemyShipNumber: 1
+  maxEnemyShipNumber: 2
   minEnemyShipDistance: 750
   maxEnemyShipDistance: 800
   minEnemyShipScale: 1

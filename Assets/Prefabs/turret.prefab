@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 8238086053772709073}
   - component: {fileID: 8238086053772709072}
   - component: {fileID: 8238086053772709085}
+  - component: {fileID: 5890424611428844985}
+  - component: {fileID: 998003339258281384}
   m_Layer: 0
   m_Name: turret
   m_TagString: Untagged
@@ -154,12 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fc0a7cb1765c443ac9b4f30abd9cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linearForce: 0
   despawnDistance: 250
-  angularForce: 1
-  maxDistanceToTarget: 0
-  minDistanceShootTarget: 100
-  maxAngleShootTarget: 25
   realDamage: 5
   shieldsDamage: 1
 --- !u!114 &8238086053772709085
@@ -192,3 +189,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5890424611428844985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120605424573608325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1464002c600687f448093bd9222d486d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linearForce: 0
+  angularForce: 1
+  maxDistanceToTarget: 10
+  minDistanceShootTarget: 100
+  maxAngleShootTarget: 25
+--- !u!114 &998003339258281384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120605424573608325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a6eb21c0c87e34a863318ce3519a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

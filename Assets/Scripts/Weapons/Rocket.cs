@@ -12,7 +12,7 @@ public class Rocket : MonoBehaviour
 
     protected Transform _transform;
     protected Rigidbody _rg;
-    protected Transform _objective;
+    protected Transform _target;
 
     void Awake() {
         _transform = GetComponent<Transform>();
@@ -21,26 +21,26 @@ public class Rocket : MonoBehaviour
 
     private void OnEnable() {
         StartCoroutine(DespawnCoroutine());
-        _objective = null;
+        _target = null;
     }
 
     void Update(){
-        if(_objective != null && !_objective.gameObject.activeSelf) {
-            _objective = null;
+        if(_target != null && !_target.gameObject.activeSelf) {
+            _target = null;
         }
     }
 
 
     void FixedUpdate(){
         _rg.velocity = _transform.forward * speed;
-        if(_objective != null) {
-            Quaternion targetRotation = Quaternion.LookRotation(_objective.position - _transform.position);
+        if(_target != null) {
+            Quaternion targetRotation = Quaternion.LookRotation(_target.position - _transform.position);
             _rg.MoveRotation(Quaternion.RotateTowards(_transform.rotation, targetRotation,turn));
         }
     }
 
     public void SetObjective(Transform objective){
-        _objective = objective;
+        _target = objective;
     }
 
     private void OnDisable() {

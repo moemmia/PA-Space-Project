@@ -27,7 +27,11 @@ public class EnemyInput : MonoBehaviour
     }
 
     void OnEnable() {
-        maxDistanceToTarget += _transform.localScale.x;
+        maxDistanceToTarget += _transform.localScale.x * 2;
+    }
+
+    void OnDisable() {
+        maxDistanceToTarget -= _transform.localScale.x * 2;
     }
 
     void Update() {

@@ -3,23 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CursorController : MonoBehaviour {
-    public Image mouse;
+public class CursorController : BaseCursorController {
     public Image crosshair;
     
     protected Transform _player;
     protected Camera _camera;
-    protected RaycastHit _hit;
 
-    void Awake () {
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
+    protected override void Awake () {
+        base.Awake();
         _player = Player.instance.GetComponent<Transform>();
         _camera = GetComponent<Camera>();
     }
 
-    void Update () {
-        mouse.transform.position = Input.mousePosition;
+    protected override void Update () {
+        base.Update();
         
         if(Physics.Raycast(_player.position, _player.forward, out _hit, Mathf.Infinity)){
             crosshair.transform.position = _camera.WorldToScreenPoint(_hit.point);

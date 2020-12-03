@@ -12,6 +12,6 @@ public class RocketEnemyWeapon : EnemyWeapon
     }
     
     protected override void InstanciateShoot() {
-        GameObject rocket = PoolManager.instance.Spawn(rocketPrefab, _transform.position + _transform.forward * _transform.localScale.x * 5f, _transform.rotation);
+        GameObject rocket = PoolManager.instance.Spawn(rocketPrefab, _transform.position + _transform.forward * (_transform.localScale.x + 5f), _transform.rotation);
     }
 }

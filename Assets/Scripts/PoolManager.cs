@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolManager : Singleton<PoolManager> {
-    Dictionary<string, List<GameObject>> pool, instanciatedPool;
-    Transform poolParent;
 
-    private void Awake() {
+    protected Dictionary<string, List<GameObject>> pool, instanciatedPool;
+    protected Transform poolParent;
+
+    void Awake() {
         poolParent = new GameObject("Pool").transform;
         instanciatedPool = new Dictionary<string, List<GameObject>>();
         pool = new Dictionary<string, List<GameObject>>();

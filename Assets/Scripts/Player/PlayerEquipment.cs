@@ -6,9 +6,13 @@ using UnityEngine.UI;
 
 public class PlayerEquipment : MonoBehaviour {
 
-    public Image weaponImage;
-    public List<PlayerWeapon> weapons;
-    private int _selectedWeapon = 0;
+    [SerializeField]
+    protected Image weaponImage;
+
+    [SerializeField]
+    protected List<PlayerWeapon> weapons;
+
+    protected int _selectedWeapon = 0;
 
     public void SetShooting(bool isShooting) {
         weapons[_selectedWeapon].SetShooting(isShooting);
@@ -19,6 +23,7 @@ public class PlayerEquipment : MonoBehaviour {
         SetShooting(weapons[_selectedWeapon].isShooting() && _selectedWeapon == selected);
         _selectedWeapon = selected;
 
-        weaponImage.sprite = weapons[_selectedWeapon].GetWeaponImage();
+        weaponImage.sprite = weapons[_selectedWeapon].GetWeaponSprite();
     }
+    
 }

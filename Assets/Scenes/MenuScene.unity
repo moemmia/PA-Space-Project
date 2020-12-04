@@ -845,7 +845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4aa74476f725a749854119bcf494619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: {fileID: 147068402}
+  mouseImage: {fileID: 147068402}
 --- !u!1 &2091454539
 GameObject:
   m_ObjectHideFlags: 0

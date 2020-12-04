@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BaseCursorController : MonoBehaviour
-{
-    public Image mouse;
+public class BaseCursorController : MonoBehaviour {
+    
+    [SerializeField]
+    protected Image mouseImage;
     
     protected RaycastHit _hit;
 
@@ -15,6 +16,7 @@ public class BaseCursorController : MonoBehaviour
     }
 
     protected virtual void Update () {
-        mouse.transform.position = Input.mousePosition;
+        mouseImage.transform.position = Input.mousePosition;
     }
+
 }

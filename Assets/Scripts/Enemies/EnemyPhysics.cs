@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPhysics : MonoBehaviour
-{
-    protected Rigidbody _rg;
+[RequireComponent(typeof(Rigidbody))]
+public class EnemyPhysics : MonoBehaviour {
     
-    private Vector3 _appliedLinearForce = Vector3.zero;
-
-    private Quaternion _appliedAngularMove = Quaternion.identity;
+    protected Rigidbody _rg;
+    protected Vector3 _appliedLinearForce = Vector3.zero;
+    protected Quaternion _appliedAngularMove = Quaternion.identity;
 
     void Awake() {
         _rg = GetComponent<Rigidbody>();
     }
 
-    private void OnDisable() {
+    void OnDisable() {
         _rg.velocity = Vector3.zero;
         _rg.angularVelocity = Vector3.zero;
     }
@@ -28,4 +27,5 @@ public class EnemyPhysics : MonoBehaviour
         _appliedLinearForce = linearInput;
         _appliedAngularMove = angularInput;
     }
+
 }

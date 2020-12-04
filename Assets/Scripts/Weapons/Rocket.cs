@@ -2,13 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rocket : MonoBehaviour
-{
-    public float speed = 15;
-    public float turn = 15;
-    public float timeToDespawn = 5;
-    public float realDamage = 5;
-    public float shieldsDamage = 1;
+public class Rocket : MonoBehaviour {
+
+    [SerializeField]
+    protected float speed = 15;
+
+    [SerializeField]
+    protected float turn = 15;
+
+    [SerializeField]
+    protected float timeToDespawn = 5;
+
+    [SerializeField]
+    protected float realDamage = 5;
+
+    [SerializeField]
+    protected float shieldsDamage = 1;
 
     protected Transform _transform;
     protected Rigidbody _rg;
@@ -19,9 +28,14 @@ public class Rocket : MonoBehaviour
         _rg = GetComponent<Rigidbody>();
     }
 
-    private void OnEnable() {
+    void OnEnable() {
         StartCoroutine(DespawnCoroutine());
         _target = null;
+    }
+
+    void OnDisable() {
+        _rg.velocity = Vector3.zero;
+        _rg.angularVelocity = Vector3.zero;
     }
 
     void Update(){
@@ -29,7 +43,6 @@ public class Rocket : MonoBehaviour
             _target = null;
         }
     }
-
 
     void FixedUpdate(){
         _rg.velocity = _transform.forward * speed;
@@ -39,21 +52,16 @@ public class Rocket : MonoBehaviour
         }
     }
 
-    public void SetObjective(Transform objective){
-        _target = objective;
-    }
-
-    private void OnDisable() {
-        _rg.velocity = Vector3.zero;
-        _rg.angularVelocity = Vector3.zero;
-    }
-
-    private void OnCollisionEnter(Collision col) {
+    void OnCollisionEnter(Collision col) {
         var h = col.collider.GetComponent<Health>();
         if (h) {
             h.TakeDamage(realDamage, shieldsDamage);
         }
         PoolManager.instance.Despawn(gameObject);
+    }
+
+    public void SetObjective(Transform objective){
+        _target = objective;
     }
 
     protected IEnumerator DespawnCoroutine() {

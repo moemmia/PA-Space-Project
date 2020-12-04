@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour
-{
+public class HealthBar : MonoBehaviour {
+    
     [SerializeField]
     protected Slider healthSlider;
 
@@ -14,6 +14,7 @@ public class HealthBar : MonoBehaviour
     public void SetHealth(float health) {
         healthSlider.value = health;
     }
+
     public void SetShield(float shield) {
         shieldSlider.value = shield;
     }
@@ -26,4 +27,5 @@ public class HealthBar : MonoBehaviour
         shieldSlider.maxValue = shield;
         shieldSlider.value = shield;
     }
+
 }

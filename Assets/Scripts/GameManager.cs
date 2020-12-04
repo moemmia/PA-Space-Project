@@ -3,38 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager> {
-    [Header("Asteroid generation settings:")]
-    public GameObject asteroidPrefab;
-    public int maxAsteroidsNumber;
-    public float minAsteroidDistance, maxAsteroidDistance, minAsteroidScale, maxAsteroidScale;
-   
-   
-    [Header("Shipping enemies generation settings:")]
-    public GameObject enemyShipPrefab;
-    public int maxEnemyShipNumber;
-    public float minEnemyShipDistance, maxEnemyShipDistance, minEnemyShipScale, maxEnemyShipScale;
 
-    [Header("Turrent enemies generation settings:")]
-    public GameObject enemyTurretPrefab;
-    public int maxEnemyTurretNumber;
-    public float minEnemyTurretDistance, maxEnemyTurretDistance, minEnemyTurretScale, maxEnemyTurretScale;
-   
-    protected Transform _playerTransform;
+    [SerializeField]
+    protected List<SpawnableSettings> generateObjects;
+
+    protected Transform _target;
 
     void Awake() {
-        _playerTransform = Player.instance.GetComponent<Transform>();
+        _target = Player.instance.GetComponent<Transform>();
     }
 
-    private void Start() {
-        PoolManager.instance.Load(asteroidPrefab, maxAsteroidsNumber);
-        PoolManager.instance.Load(enemyShipPrefab, maxEnemyShipNumber);
-        PoolManager.instance.Load(enemyTurretPrefab, maxEnemyTurretNumber);
-        StartCoroutine(GenerateOnUpdate(asteroidPrefab, maxAsteroidsNumber, maxAsteroidDistance, minAsteroidDistance, maxAsteroidScale, minAsteroidScale));
-        StartCoroutine(GenerateOnUpdate(enemyShipPrefab, maxEnemyShipNumber, maxEnemyShipDistance, minEnemyShipDistance, maxEnemyShipScale, minEnemyShipScale));
-        StartCoroutine(GenerateOnUpdate(enemyTurretPrefab, maxEnemyTurretNumber, maxEnemyTurretDistance, minEnemyTurretDistance, maxEnemyTurretScale, minEnemyTurretScale));
+    void Start() {
+        foreach (var obj in generateObjects) {
+            PoolManager.instance.Load(obj.prefab, obj.maxNumber);
+            StartCoroutine(GenerateOnUpdate(obj.prefab, obj.maxNumber, obj.maxDistance, obj.minDistance, obj.maxScale, obj.minScale));
+        }
     }
 
-    private IEnumerator GenerateOnUpdate(GameObject prefab, int maxNumber, float maxDistance, float minDistance, float maxScale, float minScale) {
+    protected IEnumerator GenerateOnUpdate(GameObject prefab, int maxNumber, float maxDistance, float minDistance, float maxScale, float minScale) {
         bool onAwake = false;
         System.Func<bool> checkAvailability = () => PoolManager.instance.FindNumberOfInstancesOf(prefab) < maxNumber;
         while (Player.instance.isAlive) {
@@ -47,9 +33,9 @@ public class GameManager : Singleton<GameManager> {
         }
     }
     
-    private void Generate(GameObject prefab, float minDistance, float maxDistance, float maxScale, float minScale){
+    protected void Generate(GameObject prefab, float minDistance, float maxDistance, float maxScale, float minScale){
         Vector3 randomDir = Random.insideUnitSphere.normalized;
-        Vector3 spawnPos = _playerTransform.position + randomDir * Random.Range(minDistance, maxDistance);
+        Vector3 spawnPos = _target.position + randomDir * Random.Range(minDistance, maxDistance);
         Quaternion spawnRot = Random.rotation;
         Vector3 spawnScale = Vector3.one * Random.Range(minScale, maxScale);
         PoolManager.instance.Spawn(prefab, spawnPos, spawnRot, spawnScale);

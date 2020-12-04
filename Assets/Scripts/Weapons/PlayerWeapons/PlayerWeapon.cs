@@ -5,10 +5,10 @@ using UnityEngine;
 public abstract class PlayerWeapon : Weapon {
     
     [SerializeField]
-    protected Sprite _weaponImage;
+    protected Sprite weaponSprite;
 
-    public Sprite GetWeaponImage() {
-        return _weaponImage;
+    public Sprite GetWeaponSprite() {
+        return weaponSprite;
     }
 
 }

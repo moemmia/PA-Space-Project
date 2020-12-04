@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Health))]
+[RequireComponent(typeof(HealthBar))]
 [RequireComponent(typeof(PlayerPhysics))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(PlayerEquipment))]
 public class Player : Singleton<Player> {
-    private PlayerInput _input;
-    private PlayerPhysics _physics;  
-    private PlayerEquipment _weapon;
-    private Health _health;
-
-    public HealthBar _healthBar;
+    
+    protected PlayerInput _input;
+    protected PlayerPhysics _physics;  
+    protected PlayerEquipment _weapon;
+    protected Health _health;
+    protected HealthBar _healthBar;
 
     public bool isAlive { get => _health.IsAlive; }
 
@@ -23,8 +24,8 @@ public class Player : Singleton<Player> {
         _weapon = GetComponent<PlayerEquipment>();
         _health = GetComponent<Health>();
         _healthBar = GetComponent<HealthBar>();
-        _healthBar.SetMaxHealth(_health.maxHealth);
-        _healthBar.SetMaxShield(_health.maxShield);
+        _healthBar.SetMaxHealth(_health.GetMaxHealth());
+        _healthBar.SetMaxShield(_health.GetMaxShield());
     }
 
     void Update() {

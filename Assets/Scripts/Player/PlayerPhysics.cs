@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerPhysics : MonoBehaviour {
+
+    [SerializeField]
+    protected float linearForce = 50.0f;
+
+    [SerializeField]
+    protected float angularForce = 10.0f;
+
 
     protected Rigidbody _rg;
     
-    public float linearForce = 50.0f;
-    private Vector3 _appliedLinearForce = Vector3.zero;
-
-    public float angularForce = 10.0f;
-    private Vector3 _appliedAngularForce = Vector3.zero;
+    protected Vector3 _appliedLinearForce = Vector3.zero;
+    protected Vector3 _appliedAngularForce = Vector3.zero;
 
     void Awake() {
         _rg = GetComponent<Rigidbody>();

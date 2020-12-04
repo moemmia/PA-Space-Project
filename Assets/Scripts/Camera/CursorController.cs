@@ -4,24 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CursorController : BaseCursorController {
-    public Image crosshair;
+
+    [SerializeField]
+    public Image crosshairImage;
     
-    protected Transform _player;
+    protected Transform _target;
     protected Camera _camera;
 
     protected override void Awake () {
         base.Awake();
-        _player = Player.instance.GetComponent<Transform>();
+        _target = Player.instance.GetComponent<Transform>();
         _camera = GetComponent<Camera>();
     }
 
     protected override void Update () {
         base.Update();
-        
-        if(Physics.Raycast(_player.position, _player.forward, out _hit, Mathf.Infinity)){
-            crosshair.transform.position = _camera.WorldToScreenPoint(_hit.point);
+        if(Physics.Raycast(_target.position, _target.forward, out _hit, Mathf.Infinity)){
+            crosshairImage.transform.position = _camera.WorldToScreenPoint(_hit.point);
         } else {
-            crosshair.transform.position = new Vector3 (Screen.width * .5f, Screen.height * .5f, .0f);
+            crosshairImage.transform.position = new Vector3 (Screen.width * .5f, Screen.height * .5f, .0f);
         }
     }
+    
 }

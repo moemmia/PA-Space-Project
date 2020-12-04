@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
+    
     public static T _instace;
 
     public static T instance {
@@ -13,4 +14,5 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
             return _instace;
         }
     }
+
 }

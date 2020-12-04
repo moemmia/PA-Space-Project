@@ -3,18 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour
-{
-    public float maxHealth = 1;
-    public float maxShield = 1;
-    public float regenerateShieldRatio = 1;
+public class Health : MonoBehaviour {
 
-    public float immortalTimer = .75f;
+    [SerializeField]
+    protected float maxHealth = 1;
+
+    [SerializeField]
+    protected float maxShield = 1;
+
+    [SerializeField]
+    protected float regenerateShieldRatio = 1;
+
+    [SerializeField]
+    protected float immortalTimer = .75f;
+
     public bool IsAlive {
         get {
             return _currentHealth > 0;
         }
     }
+
     protected float _currentHealth = 1;
     protected float _currentShield = 1;
     protected Renderer _r;
@@ -23,7 +31,8 @@ public class Health : MonoBehaviour
     protected Color _startingColor;
     protected Color _currentColor;
 
-    public UnityEvent Die;
+    [SerializeField]
+    protected UnityEvent Die;
 
     public float GetHealth(){
         return _currentHealth;
@@ -31,6 +40,14 @@ public class Health : MonoBehaviour
 
     public float GetShield(){
         return _currentShield;
+    }
+
+    public float GetMaxHealth(){
+        return maxHealth;
+    }
+
+    public float GetMaxShield(){
+        return maxShield;
     }
 
     private void Awake() {

@@ -2,34 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
+[RequireComponent(typeof(EnemyPhysics))]
+[RequireComponent(typeof(EnemyInput))]
+[RequireComponent(typeof(EnemyEquipment))]
 public class Enemy : MonoBehaviour {
 
-    public float despawnDistance = 1000f;
+    [SerializeField]
+    protected float despawnDistance = 1000f;
 
-    public int realDamage = 5;
-    public int shieldsDamage = 1;
+    [SerializeField]
+    protected int realDamage = 5;
+    
+    [SerializeField]
+    protected int shieldsDamage = 1;
 
-    private EnemyEquipment _weapon;
-    protected Vector3 _directionToPlayer;
-
+    protected EnemyEquipment _weapon;
     protected EnemyPhysics _physics;
     protected Health _health;
-
     protected EnemyInput _input;
+    
+    public bool isAlive { get => _health.IsAlive; }
 
     void Awake() {
         _health = GetComponent<Health>();
         _weapon = GetComponent<EnemyEquipment>();
         _input = GetComponent<EnemyInput>();
         _physics = GetComponent<EnemyPhysics>();
-    }
-
-    private void OnCollisionEnter(Collision col) {
-        var h = col.collider.GetComponent<Health>();
-        if (h) {
-            h.TakeDamage(realDamage, shieldsDamage);
-            _health.TakeDamage(realDamage, shieldsDamage);
-        }
     }
 
     void Update() {
@@ -39,6 +38,14 @@ public class Enemy : MonoBehaviour {
 
         if (_input.targetDistance >= despawnDistance) {
             PoolManager.instance.Despawn(gameObject);
+        }
+    }
+
+    void OnCollisionEnter(Collision col) {
+        var h = col.collider.GetComponent<Health>();
+        if (h) {
+            h.TakeDamage(realDamage, shieldsDamage);
+            _health.TakeDamage(realDamage, shieldsDamage);
         }
     }
 

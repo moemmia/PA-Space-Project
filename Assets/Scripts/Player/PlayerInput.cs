@@ -19,13 +19,13 @@ public class PlayerInput : MonoBehaviour {
         MouseInput();
     }
 
-    private void CalcLinearInput() {
+    protected void CalcLinearInput() {
         _strafe = Input.GetAxis("Horizontal");
 
         _throttle = Mathf.MoveTowards(_throttle, Input.GetAxis("Vertical"), Time.deltaTime * 0.5f);
     }
 
-    private void CalcAngularInput() {
+    protected void CalcAngularInput() {
         Vector3 mousePosition = Input.mousePosition;
   
         _pitch = (mousePosition.y - (Screen.height * 0.5f)) / (Screen.height* 0.5f);
@@ -35,7 +35,7 @@ public class PlayerInput : MonoBehaviour {
         _yaw = Mathf.Clamp(_yaw, -1.0f, 1.0f);
     }
 
-    private void MouseInput() {
+    protected void MouseInput() {
         isShooting = Input.GetAxis("Fire1") > 0;
         scroll = Input.GetAxis("Mouse ScrollWheel") * 10;
     }

@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour {
 
-    public KeyCode key;
-    public string sceneName;
+    [SerializeField]
+    protected KeyCode key;
+
+    [SerializeField]
+    protected string sceneName;
+
     void Update() {
         if(Input.GetKeyDown(key)) {
             LoadScene();
@@ -16,4 +20,5 @@ public class SceneLoader : MonoBehaviour {
     public void LoadScene() {
         SceneManager.LoadScene(sceneName);
     }
+    
 }

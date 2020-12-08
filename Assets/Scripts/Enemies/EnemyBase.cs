@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Health))]
-public class AsteroidController : MonoBehaviour {
+public class EnemyBase : MonoBehaviour {
 
     [SerializeField]
     protected float despawnDistance = 1000;
@@ -22,16 +22,16 @@ public class AsteroidController : MonoBehaviour {
 
     public bool isAlive { get => _health.IsAlive; }
 
-    void Awake() {
+    protected virtual void Awake() {
         _rb = GetComponent<Rigidbody>();
         _transform = GetComponent<Transform>();
         _target = Player.instance.GetComponent<Transform>();
         _health = GetComponent<Health>();
     }
 
-    void FixedUpdate() {
+     protected virtual void Update() {
         if (Vector3.Magnitude(_transform.position - _target.position) > despawnDistance) {
-            PoolManager.instance.Despawn(gameObject);
+            Despawn();
         }
     }
 
@@ -61,7 +61,11 @@ public class AsteroidController : MonoBehaviour {
     }
 
     public void OnDie() {
-        PoolManager.instance.Despawn(gameObject);
+        Despawn();
+    }
+
+    protected void Despawn() {
+        GameManager.instance.DespawnAndRegerate(gameObject);
     }
 
 }

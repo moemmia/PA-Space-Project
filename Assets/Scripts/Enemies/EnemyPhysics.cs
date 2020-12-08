@@ -13,11 +13,6 @@ public class EnemyPhysics : MonoBehaviour {
         _rg = GetComponent<Rigidbody>();
     }
 
-    void OnDisable() {
-        _rg.velocity = Vector3.zero;
-        _rg.angularVelocity = Vector3.zero;
-    }
-
     void FixedUpdate() {
         _rg.MoveRotation(_appliedAngularMove);
         _rg.AddForce(_appliedLinearForce, ForceMode.Acceleration);

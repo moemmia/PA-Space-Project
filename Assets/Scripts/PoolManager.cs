@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class PoolManager : Singleton<PoolManager> {
 
-    protected Dictionary<string, List<GameObject>> pool, instanciatedPool;
+    protected Dictionary<string, List<GameObject>> pool;
     protected Transform poolParent;
 
     void Awake() {
         poolParent = new GameObject("Pool").transform;
-        instanciatedPool = new Dictionary<string, List<GameObject>>();
         pool = new Dictionary<string, List<GameObject>>();
     }
 
@@ -18,7 +17,6 @@ public class PoolManager : Singleton<PoolManager> {
 
         if (!pool.ContainsKey(prefab.name)) {
             pool[prefab.name] = new List<GameObject>();
-            instanciatedPool[prefab.name] = new List<GameObject>();
         }
 
         for (int i = 0; i < amount; i++) {
@@ -50,19 +48,13 @@ public class PoolManager : Singleton<PoolManager> {
         t.rotation = rot;
         t.localScale = scale;
         go.SetActive(true);
-        instanciatedPool[prefab.name].Add(go);
         return go;
     }
 
     public void Despawn(GameObject go) {
-        instanciatedPool[go.name].Remove(go);
         go.SetActive(false);
         go.transform.parent = poolParent;
         pool[go.name].Add(go);
-    }
-
-    public int FindNumberOfInstancesOf(GameObject go) {
-        return instanciatedPool[go.name].Count;
     }
 
 }

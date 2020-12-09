@@ -22,6 +22,11 @@ public class GameManager : Singleton<GameManager> {
         }
     }
     
+    protected IEnumerator Generate(SpawnableSettings obj, float time){
+        yield return new WaitForSeconds(time);
+        Generate(obj);
+    }
+    
     protected void Generate(SpawnableSettings obj){
         Vector3 randomDir = Random.insideUnitSphere.normalized;
         Vector3 spawnPos = _target.position + randomDir * Random.Range(obj.minDistance, obj.maxDistance);
@@ -32,15 +37,10 @@ public class GameManager : Singleton<GameManager> {
 
     public void DespawnAndRegerate(GameObject despawnable) {
         PoolManager.instance.Despawn(despawnable);
-        Debug.Log(despawnable);
         SpawnableSettings obj = generateObjects.Find( x => x.prefab.name == despawnable.name);
-        Debug.Log(obj);
-        StartCoroutine(GenerateOnTime(obj));
+        StartCoroutine(Generate(obj, .1f));
     }
 
-    protected IEnumerator GenerateOnTime(SpawnableSettings obj){
-        Generate(obj);
-        yield return new WaitForFixedUpdate();
-    }
+    
 
 }

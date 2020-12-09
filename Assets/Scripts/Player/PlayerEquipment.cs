@@ -14,13 +14,13 @@ public class PlayerEquipment : MonoBehaviour {
 
     protected int _selectedWeapon = 0;
 
-    public void SetShooting(bool isShooting) {
-        weapons[_selectedWeapon].SetShooting(isShooting);
+    public void SetShooting(bool shooting) {
+        weapons[_selectedWeapon].SetShooting(shooting);
     }
 
     public void CicleSelectedWeapon(int selectedWeapon) {
         int selected =  Mathf.Clamp(_selectedWeapon + selectedWeapon, 0, weapons.Count - 1);
-        SetShooting(weapons[_selectedWeapon].isShooting() && _selectedWeapon == selected);
+        SetShooting(weapons[_selectedWeapon].isShooting && _selectedWeapon == selected);
         _selectedWeapon = selected;
 
         weaponImage.sprite = weapons[_selectedWeapon].GetWeaponSprite();

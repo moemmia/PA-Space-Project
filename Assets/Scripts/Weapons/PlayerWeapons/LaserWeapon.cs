@@ -34,9 +34,9 @@ public class LaserWeapon : PlayerWeapon {
         _lineRenderer.startColor = _lineRenderer.endColor = Color.red;
     }
 
-    public override void SetShooting(bool isShooting) {
-        base.SetShooting(isShooting);
-        _lineRenderer.enabled = isShooting;
+    public override void SetShooting(bool shooting) {
+        base.SetShooting(shooting);
+        _lineRenderer.enabled = shooting;
     }
 
     protected override void InstanciateShoot() {

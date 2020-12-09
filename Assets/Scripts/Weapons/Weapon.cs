@@ -8,7 +8,7 @@ public abstract class Weapon : MonoBehaviour {
 
     protected Transform _transform;
 
-    protected bool _isShooting = false;
+    public bool isShooting {get; protected set;} = false;
 
     protected virtual void Awake() {
         _transform = GetComponent<Transform>();
@@ -19,17 +19,13 @@ public abstract class Weapon : MonoBehaviour {
     }
 
     void LateUpdate() {
-        if (_isShooting && _cooldownExpired) {
+        if (isShooting && _cooldownExpired) {
             Shoot();
         }
     }
     
-    public virtual void SetShooting(bool isShooting) {
-        _isShooting = isShooting;
-    }
-
-    public bool isShooting(){
-        return _isShooting;
+    public virtual void SetShooting(bool shooting) {
+        isShooting = shooting;
     }
 
     protected virtual float cooldown { get; }

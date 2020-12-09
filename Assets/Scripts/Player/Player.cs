@@ -34,12 +34,12 @@ public class Player : Singleton<Player> {
             _weapon.SetShooting(_input.isShooting);
             _weapon.CicleSelectedWeapon(Mathf.RoundToInt(_input.scroll));
         }
-        _healthBar.SetHealth(_health.GetHealth());
-        _healthBar.SetShield(_health.GetShield());
+        _healthBar.SetHealth(_health.currentHealth);
+        _healthBar.SetShield(_health.currentShield);
     }
 
     public void OnDie() {
-        
+        _weapon.SetShooting(false);
     }
     
 }

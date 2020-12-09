@@ -19,12 +19,12 @@ public class Health : MonoBehaviour {
 
     public bool IsAlive {
         get {
-            return _currentHealth > 0;
+            return currentHealth > 0;
         }
     }
 
-    protected float _currentHealth = 1;
-    protected float _currentShield = 1;
+    public float currentHealth {get; protected set;} = 1;
+    public float currentShield {get; protected set;} = 1;
     protected Renderer _r;
     protected bool _immortal;
 
@@ -34,12 +34,17 @@ public class Health : MonoBehaviour {
     [SerializeField]
     protected UnityEvent Die;
 
-    public float GetHealth(){
-        return _currentHealth;
+    private void Awake() {
+        _r = GetComponent<Renderer>();
+        _startingColor = _r.material.GetColor("_EmissionColor");
     }
 
-    public float GetShield(){
-        return _currentShield;
+    void OnEnable() {
+        currentHealth = maxHealth;
+        currentShield = maxShield;
+        _r.material.SetColor("_EmissionColor", _startingColor);
+        _currentColor = _startingColor;
+        StartCoroutine(RegenerateShield());
     }
 
     public float GetMaxHealth(){
@@ -50,27 +55,14 @@ public class Health : MonoBehaviour {
         return maxShield;
     }
 
-    private void Awake() {
-        _r = GetComponent<Renderer>();
-        _startingColor = _r.material.GetColor("_EmissionColor");
-    }
-
-    void OnEnable() {
-        _currentHealth = maxHealth;
-        _currentShield = maxShield;
-        _r.material.SetColor("_EmissionColor", _startingColor);
-        _currentColor = _startingColor;
-        StartCoroutine(RegenerateShield());
-    }
-
     public void TakeDamage(float realDamage,float shieldsDamage) {
         if (!_immortal) {
-            _currentShield -= shieldsDamage;
-            if(_currentShield <= 0) {
-                    _currentHealth -= realDamage;
-                if (_currentHealth > 0)
+            currentShield -= shieldsDamage;
+            if(currentShield <= 0) {
+                    currentHealth -= realDamage;
+                if (currentHealth > 0)
                 {
-                    StartCoroutine(DamageFlash(Color.red, _currentHealth/maxHealth));
+                    StartCoroutine(DamageFlash(Color.red, currentHealth/maxHealth));
                 } else {
                     Die.Invoke();
                 }
@@ -82,9 +74,9 @@ public class Health : MonoBehaviour {
 
     protected IEnumerator RegenerateShield() {
         while(IsAlive) {
-            if(_currentShield < maxShield) {
+            if(currentShield < maxShield) {
                 yield return new WaitForSeconds(1f);
-                _currentShield += regenerateShieldRatio;
+                currentShield += regenerateShieldRatio;
             }
             yield return new WaitForEndOfFrame();
         }

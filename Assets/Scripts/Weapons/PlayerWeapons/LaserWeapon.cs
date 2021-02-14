@@ -15,6 +15,7 @@ public class LaserWeapon : PlayerWeapon {
 
     [SerializeField]
     protected float timeBetweenDamage = 0.1f;
+    protected Transform _camera;
     
     protected LineRenderer _lineRenderer;
     protected RaycastHit _hit;
@@ -34,6 +35,10 @@ public class LaserWeapon : PlayerWeapon {
         _lineRenderer.startColor = _lineRenderer.endColor = Color.red;
     }
 
+    void Start(){
+        _camera = Camera.main.transform;
+    }
+
     public override void SetShooting(bool shooting) {
         base.SetShooting(shooting);
         _lineRenderer.enabled = shooting;
@@ -42,8 +47,8 @@ public class LaserWeapon : PlayerWeapon {
     protected override void InstanciateShoot() {
         _lineRenderer.SetPosition(0, _transform.position);
         
-        Vector3 shootDirection = _transform.forward;
-        if(Physics.Raycast(_transform.position, shootDirection, out _hit, maxRayLength)){
+        Vector3 shootDirection = _camera.forward;
+        if(Physics.Raycast(_camera.position, shootDirection, out _hit, maxRayLength)){
             _lineRenderer.SetPosition(1, _hit.point);
             var h = _hit.collider.GetComponent<Health>();
             if (h) {

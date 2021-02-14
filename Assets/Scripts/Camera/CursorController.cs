@@ -19,11 +19,11 @@ public class CursorController : BaseCursorController {
 
     protected override void Update () {
         base.Update();
-        if(Physics.Raycast(_target.position, _target.forward, out _hit, Mathf.Infinity)){
+        /* if(Physics.Raycast(_target.position, _target.forward, out _hit, Mathf.Infinity)){
             crosshairImage.transform.position = _camera.WorldToScreenPoint(_hit.point);
         } else {
             crosshairImage.transform.position = new Vector3 (Screen.width * .5f, Screen.height * .5f, .0f);
-        }
+        } */
     }
     
 }
